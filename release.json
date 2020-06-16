@@ -1,6 +1,6 @@
 {
     "name": "Gravitee.io",
-    "version": "3.3.1-SNAPSHOT",
+    "version": "3.4.0-SNAPSHOT",
     "buildTimestamp": "2020-10-15T07:19:32+0000",
     "scmSshUrl": "git@github.com:gravitee-io",
     "scmHttpUrl": "https://github.com/gravitee-io/",
@@ -23,11 +23,9 @@
         },
         {
             "name": "gravitee-management-rest-api",
-            "version": "3.3.0"
         },
         {
             "name": "gravitee-management-webui",
-            "version": "3.3.0"
         },
         {
             "name": "gravitee-portal-webui",
@@ -167,7 +165,7 @@
         },
         {
             "name": "gravitee-repository",
-            "version": "3.3.0"
+            "version": "3.4.0-SNAPSHOT"
         },
         {
             "name": "gravitee-repository-test",
@@ -187,7 +185,7 @@
         },
         {
             "name": "gravitee-repository-jdbc",
-            "version": "3.3.0"
+            "version": "3.4.0-SNAPSHOT"
         },
         {
             "name": "gravitee-resource-api",
