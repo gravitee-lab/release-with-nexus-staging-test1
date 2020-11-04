@@ -63,7 +63,7 @@
         },
         {
             "name": "gravitee-policy-transformqueryparams",
-            "version": "1.4.1"
+            "version": "1.4.1-SNAPSHOT"
         },
         {
             "name": "gravitee-policy-ipfiltering",
