@@ -71,7 +71,7 @@
         },
         {
             "name": "gravitee-policy-mock",
-            "version": "1.9.1"
+            "version": "1.9.1-SNAPSHOT"
         },
         {
             "name": "gravitee-policy-cache",
