@@ -59,7 +59,7 @@
         },
         {
             "name": "gravitee-policy-rest-to-soap",
-            "version": "1.6.0-SNAPSHOT"
+            "version": "1.6.0"
         },
         {
             "name": "gravitee-policy-transformqueryparams",
