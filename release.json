@@ -87,7 +87,7 @@
         },
         {
             "name": "gravitee-policy-oauth2",
-            "version": "1.12.1"
+            "version": "1.12.1-SNAPSHOT"
         },
         {
             "name": "gravitee-policy-html-json",
