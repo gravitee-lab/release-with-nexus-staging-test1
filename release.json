@@ -259,7 +259,7 @@
         },
         {
             "name": "gravitee-notifier-email",
-            "version": "1.2.3"
+            "version": "1.2.3-SNAPSHOT"
         },
         {
             "name": "gravitee-alert-api",
