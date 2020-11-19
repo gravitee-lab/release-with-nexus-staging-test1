@@ -63,7 +63,7 @@
         },
         {
             "name": "gravitee-policy-transformheaders",
-            "version": "1.7.0-SNAPSHOT"
+            "version": "1.7.0"
         },
         {
             "name": "gravitee-policy-rest-to-soap",
