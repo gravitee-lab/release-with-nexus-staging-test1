@@ -155,7 +155,7 @@
         },
         {
             "name": "gravitee-reporter-file",
-            "version": "1.6.2"
+            "version": "1.6.2-SNAPSHOT"
         },
         {
             "name": "gravitee-repository",
