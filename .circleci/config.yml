@@ -9,8 +9,9 @@ orbs:
   secrethub: secrethub/cli@1.0.0
 jobs:
   empty_job:
-    machine:
-      image: 'ubuntu-1604:201903-01'
+    docker:
+     - image: alpine
+    working_directory: /mnt/ramdisk
     steps:
       - run:
           name: "This is a dummy empty job (isn't it ?)"
