@@ -11,6 +11,7 @@ jobs:
   empty_job:
     docker:
      - image: alpine
+    resource_class: small
     working_directory: /mnt/ramdisk
     steps:
       - run:
