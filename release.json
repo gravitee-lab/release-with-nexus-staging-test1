@@ -31,7 +31,7 @@
         },
         {
             "name": "gravitee-portal-webui",
-            "version": "3.3.0"
+            "version": "3.3.0-SNAPSHOT"
         },
         {
             "name": "gravitee-identityprovider-api",
@@ -95,7 +95,7 @@
         },
         {
             "name": "gravitee-policy-oauth2",
-            "version": "1.13.0"
+            "version": "1.13.0-SNAPSHOT"
         },
         {
             "name": "gravitee-policy-html-json",
@@ -103,7 +103,7 @@
         },
         {
             "name": "gravitee-policy-groovy",
-            "version": "1.11.1"
+            "version": "1.11.1-SNAPSHOT"
         },
         {
             "name": "gravitee-policy-dynamic-routing",
@@ -151,7 +151,7 @@
         },
         {
             "name": "gravitee-policy-callout-http",
-            "version": "1.10.0"
+            "version": "1.10.0-SNAPSHOT"
         },
         {
             "name": "gravitee-policy-assign-attributes",
@@ -163,7 +163,7 @@
         },
         {
             "name": "gravitee-reporter-file",
-            "version": "1.6.2"
+            "version": "1.6.2-SNAPSHOT"
         },
         {
             "name": "gravitee-repository",
@@ -223,7 +223,7 @@
         },
         {
             "name": "gravitee-fetcher-git",
-            "version": "1.7.0"
+            "version": "1.7.0-SNAPSHOT"
         },
         {
             "name": "gravitee-fetcher-gitlab",
@@ -279,7 +279,7 @@
         },
         {
             "name": "gravitee-service-discovery-api",
-            "version": "1.1.1"
+            "version": "1.1.1-SNAPSHOT"
         },
         {
             "name": "gravitee-service-discovery-consul",
@@ -295,7 +295,7 @@
         },
         {
             "name": "gravitee-policy-role-based-access-control",
-            "version": "1.0.3"
+            "version": "1.0.3-SNAPSHOT"
         },
         {
             "name": "gravitee-policy-ssl-enforcement",
@@ -307,7 +307,7 @@
         },
         {
             "name": "gravitee-policy-regex-threat-protection",
-            "version": "1.1.0"
+            "version": "1.1.0-SNAPSHOT"
         },
         {
             "name": "gravitee-policy-xml-threat-protection",
