@@ -138,6 +138,10 @@ workflows:
                 - 3.4.x
                 - 3.5.x
                 - 3.6.x
+                - 4.1.x
+                - 4.2.x
+                - 4.3.x
+                - 4.4.x
                 - master # ? as discussed ? if un-commented, any new pushed commit to master will trigger a Release Process DRY RUN
   release_process:
     when:
@@ -164,4 +168,8 @@ workflows:
                 - 3.4.x
                 - 3.5.x
                 - 3.6.x
+                - 4.1.x
+                - 4.2.x
+                - 4.3.x
+                - 4.4.x
                 - master # ? as discussed ? if un-commented, any new pushed commit to master will trigger a Release Process DRY RUN
