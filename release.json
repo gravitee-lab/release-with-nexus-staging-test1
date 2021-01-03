@@ -7,19 +7,23 @@
     "components": [
         {
             "name": "graviteek-cicd-test-maven-project-g1",
-            "version": "4.1.31"
+            "version": "4.1.33-SNAPSHOT"
         },
         {
             "name": "graviteek-cicd-test-maven-project-g2",
-            "version": "4.2.67"
+            "version": "4.2.68-SNAPSHOT"
         },
         {
             "name": "graviteek-cicd-test-maven-project-g3",
-            "version": "4.3.17"
+            "version": "4.3.18-SNAPSHOT"
         },
         {
             "name": "graviteek-cicd-test-maven-project-fail",
-            "version": "4.4.12"
+            "version": "4.4.14-SNAPSHOT"
+        },
+        {
+            "name": "graviteek-cicd-test-maven-project-g6",
+            "version": "4.6.22-SNAPSHOT"
         },
         {
             "name": "gravitee-common",
@@ -335,6 +339,7 @@
             "graviteek-cicd-test-maven-project-g1"
         ],
         [
+            "graviteek-cicd-test-maven-project-g6",
             "graviteek-cicd-test-maven-project-fail"
         ],
         [
