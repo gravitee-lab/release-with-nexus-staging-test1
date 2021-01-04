@@ -1,13 +1,13 @@
 {
     "name": "Gravitee.io",
-    "version": "4.4.86-SNAPSHOT",
+    "version": "4.4.87-SNAPSHOT",
     "buildTimestamp": "2020-10-15T07:19:32+0000",
     "scmSshUrl": "git@github.com:gravitee-io",
     "scmHttpUrl": "https://github.com/gravitee-io/",
     "components": [
         {
             "name": "graviteek-cicd-test-maven-project-g1",
-            "version": "4.1.37-SNAPSHOT"
+            "version": "4.1.38-SNAPSHOT"
         },
         {
             "name": "graviteek-cicd-test-maven-project-g2",
@@ -19,11 +19,11 @@
         },
         {
             "name": "graviteek-cicd-test-maven-project-g6",
-            "version": "4.6.24-SNAPSHOT"
+            "version": "4.6.25-SNAPSHOT"
         },
         {
             "name": "graviteek-cicd-test-maven-project-fail",
-            "version": "4.4.17-SNAPSHOT"
+            "version": "4.4.18-SNAPSHOT"
         },
         {
             "name": "gravitee-common",
