@@ -104,7 +104,7 @@ jobs:
       - run:
           name: "Remember Gravitee Release Version"
           command: |
-                    apt-get install -y jq
+                    sudo apt-get install -y jq
                     export RELEASE_VERSION_NUMBER=$(cat release.json | jq .version | awk -F '"' '{print $2}')
                     export TRIMMED_RELEASE_VERSION_NUMBER=$(echo "${RELEASE_VERSION_NUMBER}" | awk -F '-SNAPSHOT' '{print $1}')
                     export RELEASE_VERSION_NUMBER=${TRIMMED_RELEASE_VERSION_NUMBER}
