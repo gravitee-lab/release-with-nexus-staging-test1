@@ -3,7 +3,7 @@ version: 2.1
 parameters:
   gio_action:
     type: enum
-    enum: [release, dry_release, blank]
+    enum: [release, dry_release, publish_bundles, blank]
     default: blank
 orbs:
   secrethub: secrethub/cli@1.0.0
@@ -215,6 +215,10 @@ workflows:
   # This workflow is triggered by the git tag created when
   # the maven release process successfully completes.
   publish_bundles:
+    when:
+      and:
+        - equal: [ publish_bundles, << pipeline.parameters.gio_action >> ]
+        - not: << pipeline.parameters.dry_run >>
     jobs:
       - publish_bundles_job:
           # requires:
