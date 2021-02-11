@@ -81,7 +81,6 @@ jobs:
 
       # after release is finished, the nexus staging phase is
       - gravitee/nexus_staging_trigger:
-          context: cicd-orchestrator
           secrethub_org: gravitee-lab
           secrethub_repo: cicd
           ssh_nexus_staging_git_repo: git@github.com:gravitee-lab/nexus-staging.git
@@ -146,7 +145,6 @@ jobs:
                     echo "RELEASE_VERSION_NUMBER=[${RELEASE_VERSION_NUMBER}]"
                     git checkout ${RELEASE_VERSION_NUMBER}
       - gravitee/nexus_staging_trigger:
-          context: cicd-orchestrator
           secrethub_org: gravitee-lab
           secrethub_repo: cicd
           ssh_nexus_staging_git_repo: git@github.com:gravitee-lab/nexus-staging.git
