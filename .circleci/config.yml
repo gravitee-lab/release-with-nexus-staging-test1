@@ -211,8 +211,8 @@ workflows:
       # return to simple definition :
       - gravitee/nexus_staging_trigger:
           context: cicd-orchestrator
-          secrethub_org: << pipeline.parameters.secrethub_org >>
-          secrethub_repo: << pipeline.parameters.secrethub_repo >>
+          secrethub_org: gravitee-lab
+          secrethub_repo: cicd
           ssh_nexus_staging_git_repo: git@github.com:gravitee-lab/nexus-staging.git
           filters:
             branches:
