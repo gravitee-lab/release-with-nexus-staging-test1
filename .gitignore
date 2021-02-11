@@ -14,3 +14,4 @@ graviteebot.gpg.priv.key
 graviteebot.gpg.pub.key
 .secrets.json
 .secrethub.credential
+.remember.gravitee.release.version
