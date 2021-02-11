@@ -328,32 +328,18 @@
     ],
     "buildDependencies": [
         [
-            "graviteek-cicd-test-maven-project-g1"
-        ],
-        [
-            "graviteek-cicd-test-maven-project-g2"
-        ],
-        [
-            "graviteek-cicd-test-maven-project-g3"
-        ],
-        [
-            "graviteek-cicd-test-maven-project-fail"
-        ],
-        [
-            "gravitee-common"
-        ],
-        [
+            "graviteek-cicd-test-maven-project-g1",
+            "graviteek-cicd-test-maven-project-g2",
+            "graviteek-cicd-test-maven-project-g3",
+            "graviteek-cicd-test-maven-project-fail",
+            "gravitee-common",
             "gravitee-repository",
             "gravitee-expression-language",
             "gravitee-service-discovery-api",
-            "gravitee-notifier-api"
-        ],
-        [
+            "gravitee-notifier-api",
             "gravitee-repository-test",
             "gravitee-service-discovery-consul",
-            "gravitee-service-discovery-eureka"
-        ],
-        [
+            "gravitee-service-discovery-eureka",
             "gravitee-reporter-api",
             "gravitee-resource-api",
             "gravitee-definition",
@@ -365,31 +351,17 @@
             "gravitee-alert-api",
             "gravitee-notifier-email",
             "gravitee-identityprovider-api",
-            "gravitee-cockpit-api"
-        ],
-        [
-            "gravitee-gateway-api"
-        ],
-        [
-            "gravitee-policy-api"
-        ],
-        [
-            "gravitee-plugin"
-        ],
-        [
-            "graviteeio-node"
-        ],
-        [
+            "gravitee-cockpit-api",
+            "gravitee-gateway-api",
+            "gravitee-policy-api",
+            "gravitee-plugin",
+            "graviteeio-node",
             "gravitee-gateway",
-            "gravitee-resource-oauth2-provider-api"
-        ],
-        [
+            "gravitee-resource-oauth2-provider-api",
             "gravitee-resource-cache",
             "gravitee-resource-oauth2-provider-generic",
             "gravitee-resource-oauth2-provider-am",
-            "gravitee-resource-oauth2-provider-keycloak"
-        ],
-        [
+            "gravitee-resource-oauth2-provider-keycloak",
             "gravitee-policy-apikey",
             "gravitee-policy-ratelimit",
             "gravitee-policy-request-content-limit",
@@ -433,9 +405,7 @@
             "gravitee-fetcher-git",
             "gravitee-fetcher-gitlab",
             "gravitee-fetcher-bitbucket",
-            "gravitee-fetcher-github"
-        ],
-        [
+            "gravitee-fetcher-github",
             "gravitee-management-rest-api",
             "gravitee-management-webui",
             "gravitee-portal-webui"
