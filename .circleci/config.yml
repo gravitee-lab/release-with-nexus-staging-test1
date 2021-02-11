@@ -29,6 +29,12 @@ jobs:
     steps:
       - checkout
       - secrethub/install
+      - gravitee/nexus_staging_prepare_bucket:
+          dry_run: true
+          maven_container_image_tag: stable-latest
+          maven_profile_id: gio-release
+          secrethub_org: gravitee-lab
+          secrethub_repo: cicd
       - run:
           name: "Docker pull"
           command: |
@@ -67,6 +73,12 @@ jobs:
     steps:
       - checkout
       - secrethub/install
+      - gravitee/nexus_staging_prepare_bucket:
+          dry_run: false
+          maven_container_image_tag: stable-latest
+          maven_profile_id: gio-release
+          secrethub_org: gravitee-lab
+          secrethub_repo: cicd
       - run:
           name: "Docker pull"
           command: |
@@ -95,6 +107,24 @@ jobs:
                     export ENV_VARS="--env GH_ORG=${GITHUB_ORG} --env SECRETHUB_ORG=${SECRETHUB_ORG} --env SECRETHUB_REPO=${SECRETHUB_REPO}"
                     docker run --name orchestrator ${ENV_VARS} ${DOCKER_VOLUMES} --restart no -it quay.io/gravitee-lab/cicd-orchestrator:stable-latest -s mvn_release --dry-run false
                     exit "$?"
+
+  publish_bundles_job:
+    machine:
+      image: 'ubuntu-1604:201903-01'
+    environment:
+      GITHUB_ORG: ${GITHUB_ORG}
+      SECRETHUB_ORG: gravitee-lab
+      SECRETHUB_REPO: cicd
+    steps:
+      - checkout
+      - secrethub/install
+      - gravitee/publish_bundles:
+          dry_run: false
+          maven_container_image_tag: stable-latest
+          maven_profile_id: gio-release
+          secrethub_org: gravitee-lab
+          secrethub_repo: cicd
+
 workflows:
   version: 2.1
   # Blank process invoked when pull requests events are triggered
@@ -118,21 +148,9 @@ workflows:
               # Therefore, will be triggered when a pull request, with target branch being
               # a release branch, is accepted
               only:
-                - 1.20.x
-                - 1.25.x
-                - 1.29.x
-                - 1.30.x
-                - 3.0.0-beta
-                - 3.0.x
-                - 3.1.x
-                - 3.2.x
-                - 3.4.x
-                - 3.5.x
-                - 3.6.x
-                - 4.1.x
-                - 4.2.x
-                - 4.3.x
-                - 4.4.x
+                - /^[0-9]+.[0-9]+.x/ # e.g. 4.5.x
+                # - /^[0-9]+.[0-9]+.[0-9]+/ # e.g. 3.0.0
+                - /^[0-9]+.[0-9]+.[0-9]+-beta/ # e.g. 3.0.0-beta
                 - master # ? as discussed ? if un-commented, any new pushed commit to master will trigger a Release Process DRY RUN
   release_process:
     when:
@@ -148,19 +166,70 @@ workflows:
               # Therefore, will be triggered when a pull request is accepted, with target branch being
               # the master branch.
               only:
-                - 1.20.x
-                - 1.25.x
-                - 1.29.x
-                - 1.30.x
-                - 3.0.0-beta
-                - 3.0.x
-                - 3.1.x
-                - 3.2.x
-                - 3.4.x
-                - 3.5.x
-                - 3.6.x
-                - 4.1.x
-                - 4.2.x
-                - 4.3.x
-                - 4.4.x
+                - /^[0-9]+.[0-9]+.x/ # e.g. 4.5.x
+                # - /^[0-9]+.[0-9]+.[0-9]+/ # e.g. 3.0.0
+                - /^[0-9]+.[0-9]+.[0-9]+-beta/ # e.g. 3.0.0-beta
                 - master # ? as discussed ? if un-commented, any new pushed commit to master will trigger a Release Process DRY RUN
+  # ---
+  # This workflow is triggered by the git tag created when
+  # the maven release process successfully completes.
+  publish_bundles:
+    jobs:
+      - publish_bundles_job:
+          # requires:
+            # - release_process
+          context: cicd-orchestrator
+          # one cannot filters tag/branches when conditonal workflows
+          filters:
+            branches:
+              # ---
+              # Will run only when git commits are pushed to master branch
+              # Therefore, will be triggered when a pull request is accepted, with target branch being
+              # the master branch.
+              ignore:
+                # ---
+                - /^feature\/.*/ # feature/<any string here>
+                - /^support\/.*/ # support/<any string here>
+                - /^issue\/.*/ # issue/<any string here>
+                - /^cicd\/.*/ # cicd/<any string here>
+                - /^.*\/.*/ # <any string here>/<any string here>
+            tags:
+              # only: /^v.*/
+              only:
+                - /^[0-9]+.[0-9]+.[0-9]+/
+                - /^[0-9]+.[0-9]+.[0-9]+-alpha/
+                - /^[0-9]+.[0-9]+.[0-9]+-beta/
+  # ---
+  # this workflow is triggered 
+  nexus_staging_trigger:
+    # see https://circleci.com/docs/2.0/configuration-reference/#logic-statement-examples
+    when:
+      and:
+        - equal: [ nexus_staging, << pipeline.parameters.gio_action >> ]
+        - not: << pipeline.parameters.dry_run >>
+    jobs:
+      # return to simple definition :
+      - gravitee/nexus_staging_trigger:
+          context: cicd-orchestrator
+          secrethub_org: << pipeline.parameters.secrethub_org >>
+          secrethub_repo: << pipeline.parameters.secrethub_repo >>
+          ssh_nexus_staging_git_repo: git@github.com:gravitee-lab/nexus-staging.git
+          filters:
+            branches:
+              # ---
+              # Will run only when git commits are pushed to master branch
+              # Therefore, will be triggered when a pull request is accepted, with target branch being
+              # the master branch.
+              ignore:
+                # ---
+                - /^feature\/.*/ # feature/<any string here>
+                - /^support\/.*/ # support/<any string here>
+                - /^issue\/.*/ # issue/<any string here>
+                - /^cicd\/.*/ # cicd/<any string here>
+                - /^.*\/.*/ # <any string here>/<any string here>
+            tags:
+              # only: /^v.*/
+              only:
+                - /^[0-9]+.[0-9]+.[0-9]+/
+                - /^[0-9]+.[0-9]+.[0-9]+-alpha/
+                - /^[0-9]+.[0-9]+.[0-9]+-beta/
