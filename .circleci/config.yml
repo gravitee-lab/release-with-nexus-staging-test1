@@ -216,7 +216,7 @@ workflows:
   # the maven release process successfully completes.
   publish_bundles:
     when:
-      - equal: [ publish_bundles, << pipeline.parameters.gio_action >> ]
+      equal: [ publish_bundles, << pipeline.parameters.gio_action >> ]
     jobs:
       - publish_bundles_job:
           # requires:
