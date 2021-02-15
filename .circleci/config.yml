@@ -5,6 +5,9 @@ parameters:
     type: enum
     enum: [release, dry_release, publish_bundles, blank]
     default: blank
+  gio_release_version:
+    type: string
+    default: $GIO_RELEASE_VERSION
 orbs:
   secrethub: secrethub/cli@1.0.0
   gravitee: gravitee-io/gravitee@dev:1.0.4
@@ -35,15 +38,7 @@ jobs:
           maven_profile_id: gio-release
           secrethub_org: gravitee-lab
           secrethub_repo: cicd
-      - run:
-          name: "Remember Gravitee Release Version"
-          command: |
-                    apt-get install -y jq
-                    export RELEASE_VERSION_NUMBER=$(cat release.json | jq .version | awk -F '"' '{print $2}')
-                    export TRIMMED_RELEASE_VERSION_NUMBER=$(echo "${RELEASE_VERSION_NUMBER}" | awk -F '-SNAPSHOT' '{print $1}')
-                    export RELEASE_VERSION_NUMBER=${TRIMMED_RELEASE_VERSION_NUMBER}
-                    echo "${RELEASE_VERSION_NUMBER}" > ./.remember.gravitee.release.version
-                    echo "./.remember.gravitee.release.version" >> ./.gitignore
+
       - run:
           name: "Docker pull"
           command: |
@@ -72,18 +67,6 @@ jobs:
                     export ENV_VARS="--env GH_ORG=${GITHUB_ORG} --env SECRETHUB_ORG=${SECRETHUB_ORG} --env SECRETHUB_REPO=${SECRETHUB_REPO}"
                     docker run --name orchestrator ${ENV_VARS} ${DOCKER_VOLUMES} --restart no -it quay.io/gravitee-lab/cicd-orchestrator:stable-latest -s mvn_release --dry-run
                     exit "$?"
-      - run:
-          name: "Come back to Gravitee Release Version"
-          command: |
-                    export RELEASE_VERSION_NUMBER=$(cat ./.remember.gravitee.release.version)
-                    echo "RELEASE_VERSION_NUMBER=[${RELEASE_VERSION_NUMBER}]"
-                    git checkout ${RELEASE_VERSION_NUMBER}
-      - gravitee/publish_bundles:
-          dry_run: false
-          maven_container_image_tag: stable-latest
-          maven_profile_id: gio-release
-          secrethub_org: gravitee-lab
-          secrethub_repo: cicd
 
   run_orchestrator:
     machine:
@@ -101,15 +84,6 @@ jobs:
           maven_profile_id: gio-release
           secrethub_org: gravitee-lab
           secrethub_repo: cicd
-      - run:
-          name: "Remember Gravitee Release Version"
-          command: |
-                    sudo apt-get install -y jq
-                    export RELEASE_VERSION_NUMBER=$(cat release.json | jq .version | awk -F '"' '{print $2}')
-                    export TRIMMED_RELEASE_VERSION_NUMBER=$(echo "${RELEASE_VERSION_NUMBER}" | awk -F '-SNAPSHOT' '{print $1}')
-                    export RELEASE_VERSION_NUMBER=${TRIMMED_RELEASE_VERSION_NUMBER}
-                    echo "${RELEASE_VERSION_NUMBER}" > ./.remember.gravitee.release.version
-                    echo "./.remember.gravitee.release.version" >> ./.gitignore
       - run:
           name: "Docker pull"
           command: |
@@ -139,19 +113,23 @@ jobs:
                     docker run --name orchestrator ${ENV_VARS} ${DOCKER_VOLUMES} --restart no -it quay.io/gravitee-lab/cicd-orchestrator:stable-latest -s mvn_release --dry-run false
                     exit "$?"
 
-      - run:
-          name: "Come back to Gravitee Release Version"
-          command: |
-                    export RELEASE_VERSION_NUMBER=$(cat ./.remember.gravitee.release.version)
-                    echo "RELEASE_VERSION_NUMBER=[${RELEASE_VERSION_NUMBER}]"
-                    git checkout ${RELEASE_VERSION_NUMBER}
+  publish_bundles_job:
+    machine:
+      image: 'ubuntu-1604:201903-01'
+    environment:
+      GITHUB_ORG: ${GITHUB_ORG}
+      SECRETHUB_ORG: gravitee-lab
+      SECRETHUB_REPO: cicd
+    steps:
+      - checkout
+      - secrethub/install
       - gravitee/publish_bundles:
           dry_run: false
           maven_container_image_tag: stable-latest
           maven_profile_id: gio-release
           secrethub_org: gravitee-lab
           secrethub_repo: cicd
-
+          gio_release_version: << pipeline.parameters.gio_release_version >>
 workflows:
   version: 2.1
   # Blank process invoked when pull requests events are triggered
@@ -201,18 +179,18 @@ workflows:
           # requires:
             # - run_orchestrator
           # context: cicd-orchestrator
-  # # ---
-  # # This workflow is triggered by the git tag created when
+  # ---
+  # This workflow is triggered by the git tag created when
   # the maven release process successfully completes.
-  # publish_bundles:
-    # when:
-      # equal: [ publish_bundles, << pipeline.parameters.gio_action >> ]
-    # jobs:
-      # - publish_bundles_job:
-          # # requires:
-            # # - release_process
-          # context: cicd-orchestrator
-          # # one cannot filters tag/branches when conditonal workflows
+  publish_bundles:
+    when:
+      equal: [ publish_bundles, << pipeline.parameters.gio_action >> ]
+    jobs:
+      - publish_bundles_job:
+          # requires:
+            # - release_process
+          context: cicd-orchestrator
+          # one cannot filters tag/branches when conditonal workflows
           # filters:
             # branches:
               # # ---
