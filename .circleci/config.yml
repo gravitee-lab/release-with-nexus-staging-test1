@@ -84,7 +84,7 @@ jobs:
           maven_profile_id: gio-release
           secrethub_org: gravitee-lab
           secrethub_repo: cicd
-          
+
   run_orchestrator:
     machine:
       image: 'ubuntu-1604:201903-01'
@@ -152,23 +152,6 @@ jobs:
           secrethub_org: gravitee-lab
           secrethub_repo: cicd
 
-  publish_bundles_job:
-    machine:
-      image: 'ubuntu-1604:201903-01'
-    environment:
-      GITHUB_ORG: ${GITHUB_ORG}
-      SECRETHUB_ORG: gravitee-lab
-      SECRETHUB_REPO: cicd
-    steps:
-      - checkout
-      - secrethub/install
-      - gravitee/publish_bundles:
-          dry_run: false
-          maven_container_image_tag: stable-latest
-          maven_profile_id: gio-release
-          secrethub_org: gravitee-lab
-          secrethub_repo: cicd
-
 workflows:
   version: 2.1
   # Blank process invoked when pull requests events are triggered
@@ -214,10 +197,10 @@ workflows:
                 # - /^[0-9]+.[0-9]+.[0-9]+/ # e.g. 3.0.0
                 - /^[0-9]+.[0-9]+.[0-9]+-beta/ # e.g. 3.0.0-beta
                 - master # ? as discussed ? if un-commented, any new pushed commit to master will trigger a Release Process DRY RUN
-      - publish_bundles_job:
-          requires:
-            - run_orchestrator
-          context: cicd-orchestrator
+      # - publish_bundles_job:
+          # requires:
+            # - run_orchestrator
+          # context: cicd-orchestrator
   # ---
   # This workflow is triggered by the git tag created when
   # the maven release process successfully completes.
