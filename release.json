@@ -7,12 +7,12 @@
     "components": [
         {
             "name": "graviteek-cicd-test-maven-project-g1",
-            "version": "4.1.45",
+            "version": "4.1.45-SNAPSHOT",
             "since": "4.1.5"
         },
         {
             "name": "graviteek-cicd-test-maven-project-g2",
-            "version": "4.2.72",
+            "version": "4.2.72-SNAPSHOT",
             "since": "4.1.5"
         },
         {
