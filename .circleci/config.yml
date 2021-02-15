@@ -72,18 +72,6 @@ jobs:
                     export ENV_VARS="--env GH_ORG=${GITHUB_ORG} --env SECRETHUB_ORG=${SECRETHUB_ORG} --env SECRETHUB_REPO=${SECRETHUB_REPO}"
                     docker run --name orchestrator ${ENV_VARS} ${DOCKER_VOLUMES} --restart no -it quay.io/gravitee-lab/cicd-orchestrator:stable-latest -s mvn_release --dry-run
                     exit "$?"
-      - run:
-          name: "Come back to Gravitee Release Version"
-          command: |
-                    export RELEASE_VERSION_NUMBER=$(cat ./.remember.gravitee.release.version)
-                    echo "RELEASE_VERSION_NUMBER=[${RELEASE_VERSION_NUMBER}]"
-                    git checkout ${RELEASE_VERSION_NUMBER}
-
-      # after release is finished, the nexus staging phase is
-      - gravitee/nexus_staging_trigger:
-          secrethub_org: gravitee-lab
-          secrethub_repo: cicd
-          ssh_nexus_staging_git_repo: git@github.com:gravitee-lab/nexus-staging.git
 
   run_orchestrator:
     machine:
@@ -138,16 +126,6 @@ jobs:
                     export ENV_VARS="--env GH_ORG=${GITHUB_ORG} --env SECRETHUB_ORG=${SECRETHUB_ORG} --env SECRETHUB_REPO=${SECRETHUB_REPO}"
                     docker run --name orchestrator ${ENV_VARS} ${DOCKER_VOLUMES} --restart no -it quay.io/gravitee-lab/cicd-orchestrator:stable-latest -s mvn_release --dry-run false
                     exit "$?"
-      - run:
-          name: "Come back to Gravitee Release Version"
-          command: |
-                    export RELEASE_VERSION_NUMBER=$(cat ./.remember.gravitee.release.version)
-                    echo "RELEASE_VERSION_NUMBER=[${RELEASE_VERSION_NUMBER}]"
-                    git checkout ${RELEASE_VERSION_NUMBER}
-      - gravitee/nexus_staging_trigger:
-          secrethub_org: gravitee-lab
-          secrethub_repo: cicd
-          ssh_nexus_staging_git_repo: git@github.com:gravitee-lab/nexus-staging.git
 
   publish_bundles_job:
     machine:
