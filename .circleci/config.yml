@@ -51,7 +51,7 @@ jobs:
                     export GITHUB_ORG=gravitee-lab
                     export SECRETHUB_ORG=gravitee-lab
                     export SECRETHUB_REPO=cicd
-                    export MAVEN_PROFILE_ID='gravitee-release'
+                    export MAVEN_PROFILE_ID='gio-release'
                     echo "GITHUB_ORG=${GITHUB_ORG}"
                     echo "SECRETHUB_ORG=${SECRETHUB_ORG}"
                     echo "SECRETHUB_REPO=${SECRETHUB_REPO}"
@@ -98,7 +98,7 @@ jobs:
                     export GITHUB_ORG=gravitee-lab
                     export SECRETHUB_ORG=gravitee-lab
                     export SECRETHUB_REPO=cicd
-                    export MAVEN_PROFILE_ID='gravitee-release'
+                    export MAVEN_PROFILE_ID='gio-release'
                     echo "GITHUB_ORG=${GITHUB_ORG}"
                     echo "SECRETHUB_ORG=${SECRETHUB_ORG}"
                     echo "SECRETHUB_REPO=${SECRETHUB_REPO}"
