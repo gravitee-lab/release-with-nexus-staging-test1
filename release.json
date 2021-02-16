@@ -12,7 +12,7 @@
         },
         {
             "name": "graviteek-cicd-test-maven-project-g2",
-            "version": "4.2.75",
+            "version": "4.2.76-SNAPSHOT",
             "since": "4.1.10"
         },
         {
@@ -21,7 +21,7 @@
         },
         {
             "name": "cicd-test-gravitee-policy-ratelimit",
-            "version": "1.11.3",
+            "version": "1.11.4-SNAPSHOT",
             "since": "4.1.10"
         },
         {
