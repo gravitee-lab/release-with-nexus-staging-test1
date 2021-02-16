@@ -12,7 +12,7 @@
         },
         {
             "name": "graviteek-cicd-test-maven-project-g2",
-            "version": "4.2.74",
+            "version": "4.2.75-SNAPSHOT",
             "since": "4.1.9"
         },
         {
@@ -21,12 +21,12 @@
         },
         {
             "name": "cicd-test-gravitee-policy-ratelimit",
-            "version": "1.11.2",
+            "version": "1.11.3-SNAPSHOT",
             "since": "4.1.10"
         },
         {
             "name": "cicd-test-gravitee-cockpit-connectors",
-            "version": "1.0.1-SNAPSHOT"
+            "version": "1.0.1"
         },
         {
             "name": "gravitee-common",
