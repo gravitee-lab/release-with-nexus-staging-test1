@@ -350,6 +350,12 @@
             "graviteek-cicd-test-maven-project-fail"
         ],
         [
+            "cicd-test-gravitee-policy-ratelimit"
+        ],
+        [
+            "cicd-test-gravitee-cockpit-connectors"
+        ],
+        [
             "gravitee-common"
         ],
         [
