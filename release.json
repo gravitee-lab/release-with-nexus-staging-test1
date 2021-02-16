@@ -20,6 +20,14 @@
             "version": "4.3.1"
         },
         {
+            "name": "cicd-test-gravitee-policy-ratelimit",
+            "version": "1.11.2-SNAPSHOT"
+        },
+        {
+            "name": "cicd-test-gravitee-cockpit-connectors",
+            "version": "1.0.1-SNAPSHOT"
+        },
+        {
             "name": "gravitee-common",
             "version": "1.18.0"
         },
