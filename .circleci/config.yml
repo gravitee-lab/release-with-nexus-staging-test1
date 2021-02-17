@@ -123,39 +123,18 @@ jobs:
     environment:
       GITHUB_ORG: ${GITHUB_ORG}
       GIO_PRODUCT_VERSION: << pipeline.parameters.gio_product_version >>
-      RELEASE_REPO: git@github.com:gravitee-lab/release-with-nexus-staging-test1
+      # RELEASE_REPO: git@github.com:gravitee-lab/release-with-nexus-staging-test1
       SECRETHUB_ORG: gravitee-lab
       SECRETHUB_REPO: cicd
     steps:
       - checkout
       - secrethub/install
-      # - secrethub/install
-      - gravitee/git_config:
-          secrethub_org: gravitee-lab
-          secrethub_repo: cicd
       - run:
-          name: "Test Git config"
+          name: "Go back to release"
           command: |
-                    echo "check [${HOME}/.ssh.gravitee.io/]"
-                    ls -allh ${HOME}/.ssh.gravitee.io/
-                    echo "check [${HOME}/.ssh.gravitee.io/id_rsa]"
-                    ls -allh ${HOME}/.ssh.gravitee.io/id_rsa
-                    echo "check [${HOME}/.ssh.gravitee.io/id_rsa.pub]"
-                    ls -allh ${HOME}/.ssh.gravitee.io/id_rsa.pub
-                    git config --list
-                    ssh -Ti ~/.ssh.gravitee.io/id_rsa git@github.com || true
-      - run:
-          name: "Retrieving Release.json"
-          command: |
-                    echo "Retrieving Release.json of Gravitee.io release [${GIO_PRODUCT_VERSION}]"
-                    export OPS_HOME=$(pwd)
-                    echo "Current diectory: [$(pwd)]"
-                    export LOCAL_RELEASE_REPO=$(mktemp -d -t "s3cmd_install_ops-XXXXXXXXXX")
-                    git clone ${RELEASE_REPO} ${LOCAL_RELEASE_REPO}
-                    cd ${LOCAL_RELEASE_REPO}
+                    echo "Go back to Release version [${GIO_PRODUCT_VERSION}]"
                     git checkout ${GIO_PRODUCT_VERSION}
-                    cp -f ${LOCAL_RELEASE_REPO}/release.json ${OPS_HOME}/release.json
-                    cd ${OPS_HOME}
+                    cat ./release.json
       - run:
           name: "Docker pull"
           command: |
